@@ -32,7 +32,7 @@ namespace dweis.Rover.Connector
 
       public void TurnServos90()
       {
-         _port?.Write($"{{2 260 490 480 250}}");
+         _port?.Write($"{{2 250 490 480 250}}");
       }
 
       public void TurnServos180()
