@@ -68,11 +68,34 @@ namespace SimpleRoverController
          _rover?.ParallelRight();
       }
 
-      private void SelectorBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+      private async void SelectorBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          SerialPortAddress address = e.AddedItems[0] as SerialPortAddress;
          _rover?.Close();
-         _rover = new Rover(address);
+         _rover = await Task.Run(() => new Rover(address));
+      }
+
+      private void ButtonSetServos(object sender, RoutedEventArgs e)
+      {
+         _rover?.SetServo(Motors.LEFT_FRONT_SERVO, (float)LFSlider.Value);
+         _rover?.SetServo(Motors.RIGHT_FRONT_SERVO, (float)RFSlider.Value);
+         _rover?.SetServo(Motors.LEFT_REAR_SERVO, (float)LRSlider.Value);
+         _rover?.SetServo(Motors.RIGHT_REAR_SERVO, (float)RRSlider.Value);
+      }
+
+      private void ButtonCrossLegged(object sender, RoutedEventArgs e)
+      {
+         _rover?.TurnCrossLegs();
+      }
+
+      private void ButtonRotateCounter(object sender, RoutedEventArgs e)
+      {
+         _rover?.RotateCounterClockwise();
+      }
+
+      private void ButtonRotateClockwise(object sender, RoutedEventArgs e)
+      {
+         _rover?.RotateClockwise();
       }
    }
 }

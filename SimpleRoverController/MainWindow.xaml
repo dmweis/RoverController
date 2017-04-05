@@ -12,6 +12,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -30,11 +31,21 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Button Grid.Column="0" Grid.Row="1" Content="Turn 90" Click="Button_Turn90"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Rotate counter" Click="ButtonRotateCounter"/>
+        <Button Grid.Column="2" Grid.Row="1" Content="Forward" Click="Button_Forward"/>
+        <Button Grid.Column="3" Grid.Row="1" Content="Rotate clockwise" Click="ButtonRotateClockwise"/>
         <Button Grid.Column="0" Grid.Row="2" Content="Turn 180" Click="Button_Turn180"/>
         <Button Grid.Column="1" Grid.Row="2" Content="Parallel Left" Click="Button_ParallelLeft"/>
-        <Button Grid.Column="2" Grid.Row="1" Content="Forward" Click="Button_Forward"/>
         <Button Grid.Column="2" Grid.Row="2" Content="STOP" Click="Button_STOP"/>
-        <Button Grid.Column="2" Grid.Row="3" Content="Backwards" Click="Button_Backwards"/>
         <Button Grid.Column="3" Grid.Row="2" Content="Parallel Right" Click="Button_ParallelRight"/>
+        <Button Grid.Column="0" Grid.Row="3" Content="cross legged" Click="ButtonCrossLegged"/>
+        <Button Grid.Column="2" Grid.Row="3" Content="Backwards" Click="Button_Backwards"/>
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="4">
+            <Slider Name="LFSlider" Minimum="150" Maximum="600" IsMoveToPointEnabled="True" Value="250"/>
+            <Slider Name="RFSlider" Minimum="150" Maximum="600" IsMoveToPointEnabled="True" Value="490"/>
+            <Slider Name="LRSlider" Minimum="150" Maximum="600" IsMoveToPointEnabled="True" Value="480"/>
+            <Slider Name="RRSlider" Minimum="150" Maximum="600" IsMoveToPointEnabled="True" Value="250"/>
+            <Button Content="Send set servos" Click="ButtonSetServos"/>
+        </StackPanel>
     </Grid>
 </Window>
