@@ -28,6 +28,8 @@ namespace RoverAndroid
       private Button _buttonStop;
       private Button _buttonStrafeRight;
       private Button _buttonBackwards;
+      private Button _buttonSteerLeftBack;
+      private Button _buttonSteerRightBack;
 
       private TextView _textView;
 
@@ -49,6 +51,8 @@ namespace RoverAndroid
          _buttonBackwards = FindViewById<Button>(Resource.Id.buttonBackwards);
          _textView = FindViewById<TextView>(Resource.Id.textBox);
          _textView.MovementMethod = new ScrollingMovementMethod();
+         _buttonSteerLeftBack = FindViewById<Button>(Resource.Id.buttonSteerLeftBack);
+         _buttonSteerRightBack = FindViewById<Button>(Resource.Id.buttonSteerRightBack);
 
          _textView.Text = "Incoming:\n";
 
@@ -63,6 +67,8 @@ namespace RoverAndroid
          _buttonStop.Click += (sender, args) => _rover.Stop();
          _buttonStrafeRight.Click += (sender, args) => _rover.StrafeRight();
          _buttonBackwards.Click += (sender, args) => _rover.Backwards();
+         _buttonSteerLeftBack.Click += (sender, args) => _rover.SteerLeftBack();
+         _buttonSteerRightBack.Click += (sender, args) => _rover.SteerRightBack();
       }
 
    }
@@ -109,6 +115,18 @@ namespace RoverAndroid
       {
          _messageBuffer.Add($"{{2 310 555 420 200}}");
          _messageBuffer.Add($"{{1 150 600 150 600}}");
+      }
+
+      public void SteerLeftBack()
+      {
+         _messageBuffer.Add($"{{2 165 424 550 320}}");
+         _messageBuffer.Add($"{{1 600 150 600 150}}");
+      }
+
+      public void SteerRightBack()
+      {
+         _messageBuffer.Add($"{{2 310 555 420 200}}");
+         _messageBuffer.Add($"{{1 600 150 600 150}}");
       }
 
       public void Stop()

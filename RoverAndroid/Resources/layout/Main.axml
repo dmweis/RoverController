@@ -2,25 +2,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <Space
+        android:id="@+id/EmptySpace"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true" />
+    <Button
+        android:id="@+id/buttonRotAnti"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignTop="@id/EmptySpace"
+        android:layout_toLeftOf="@id/EmptySpace"
+        android:text="Rotate anti" />
+    <Button
+        android:id="@+id/buttonRotateClock"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignTop="@id/EmptySpace"
+        android:layout_toRightOf="@id/EmptySpace"
+        android:text="Clockwise" />
     <Button
         android:id="@+id/buttonForward"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/EmptySpace"
         android:text="Forward" />
     <Button
         android:id="@+id/buttonSteerLeft"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@id/buttonForward"
         android:layout_toLeftOf="@id/buttonForward"
-        android:text="Steer Right" />
+        android:text="Steer Left" />
     <Button
         android:id="@+id/buttonSteerRight"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@id/buttonForward"
         android:layout_toRightOf="@id/buttonForward"
         android:text="Steer Right" />
     <Button
@@ -52,19 +72,19 @@
         android:layout_below="@id/buttonStop"
         android:text="backwards" />
     <Button
-        android:id="@+id/buttonRotAnti"
+        android:id="@+id/buttonSteerLeftBack"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_toLeftOf="@id/buttonBackwards"
         android:layout_alignTop="@id/buttonBackwards"
-        android:text="Rotate anti" />
+        android:text="Steer left" />
     <Button
-        android:id="@+id/buttonRotateClock"
+        android:id="@+id/buttonSteerRightBack"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_toRightOf="@id/buttonBackwards"
         android:layout_alignTop="@id/buttonBackwards"
-        android:text="Clockwise" />
+        android:text="Steer right" />
     <TextView
         android:id="@+id/textBox"
         android:layout_width="match_parent"
