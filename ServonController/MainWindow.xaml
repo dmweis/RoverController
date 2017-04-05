@@ -1,0 +1,42 @@
+﻿<Window x:Class="ServonController.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ServonController"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="350"
+        Width="525"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <ComboBox ItemsSource="{Binding AvailableSerialPorts}" SelectedItem="{Binding SelectedPort}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Description}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="Refresh" Click="OnRefresh"/>
+            <Button Content="Connect" Click="OnConnect"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <local:ServoControl ServoIndex="0" NewServovalue="ServoControl_OnNewServovalue"/>
+            <local:ServoControl ServoIndex="1" NewServovalue="ServoControl_OnNewServovalue"/>
+            <local:ServoControl ServoIndex="2" NewServovalue="ServoControl_OnNewServovalue"/>
+            <local:ServoControl ServoIndex="3" NewServovalue="ServoControl_OnNewServovalue"/>
+            <local:ServoControl ServoIndex="4" NewServovalue="ServoControl_OnNewServovalue"/>
+            <local:ServoControl ServoIndex="5" NewServovalue="ServoControl_OnNewServovalue"/>
+            <local:ServoControl ServoIndex="6" NewServovalue="ServoControl_OnNewServovalue"/>
+            <local:ServoControl ServoIndex="17" NewServovalue="ServoControl_OnNewServovalue"/>
+        </StackPanel>
+    </Grid>
+</Window>

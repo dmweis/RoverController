@@ -1,0 +1,24 @@
+
+Servos:
+LEFT_FRONT
+    90 : 260
+    00 : 480
+RIGHT_FRONT
+    90 : 490
+    00 : 280
+LEFT_REAR
+    90 : 480
+    00 : 250
+RIGHT_REAR
+    90 : 250
+    00 : 480
+
+Motors:
+LEFT_FRONT
+    0 : 245
+RIGHT_FRONT
+    0 : 330
+LEFT_REAR
+    0 : 375
+RIGHT_REAR
+    0 : 350
