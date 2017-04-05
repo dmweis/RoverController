@@ -1,7 +1,7 @@
 
 Servos:
 LEFT_FRONT
-    90 : 260
+    90 : 250
     00 : 480
 RIGHT_FRONT
     90 : 490
