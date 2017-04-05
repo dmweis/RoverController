@@ -15,10 +15,10 @@ RIGHT_REAR
 
 Motors:
 LEFT_FRONT
-    0 : 245
+    0 : 345
 RIGHT_FRONT
     0 : 330
 LEFT_REAR
     0 : 375
 RIGHT_REAR
-    0 : 350
+    0 : 360
