@@ -71,6 +71,16 @@ namespace dweis.Rover.Connector
          _port?.Write($"{{2 480 280 250 480}}");
       }
 
+      public void TurnSlightlyLeft()
+      {
+         _port?.Write($"{{2 165 424 550 320}}");
+      }
+
+      public void TurnSlightlyRight()
+      {
+         _port?.Write($"{{2 310 555 420 200}}");
+      }
+
       public void FullForward()
       {
          _port?.Write($"{{1 150 600 150 600}}");

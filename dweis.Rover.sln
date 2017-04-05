@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dweis.Rover.Connector", "dw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRoverController", "SimpleRoverController\SimpleRoverController.csproj", "{C70B994D-F4D0-43EF-9AE2-0A29295FB9EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoverAndroid", "RoverAndroid\RoverAndroid.csproj", "{DFB3F1EE-A305-49F6-B243-BFCF01CE9247}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{C70B994D-F4D0-43EF-9AE2-0A29295FB9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C70B994D-F4D0-43EF-9AE2-0A29295FB9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C70B994D-F4D0-43EF-9AE2-0A29295FB9EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB3F1EE-A305-49F6-B243-BFCF01CE9247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFB3F1EE-A305-49F6-B243-BFCF01CE9247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFB3F1EE-A305-49F6-B243-BFCF01CE9247}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DFB3F1EE-A305-49F6-B243-BFCF01CE9247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFB3F1EE-A305-49F6-B243-BFCF01CE9247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFB3F1EE-A305-49F6-B243-BFCF01CE9247}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

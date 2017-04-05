@@ -45,6 +45,7 @@ namespace SimpleRoverController
 
       private void Button_Forward(object sender, RoutedEventArgs e)
       {
+         _rover?.TurnServos90();
          _rover?.FullForward();
       }
 
@@ -55,16 +56,19 @@ namespace SimpleRoverController
 
       private void Button_Backwards(object sender, RoutedEventArgs e)
       {
+         _rover?.TurnServos90();
          _rover?.FullBackwards();
       }
 
       private void Button_ParallelLeft(object sender, RoutedEventArgs e)
       {
+         _rover?.TurnServos180();
          _rover?.ParallelLeft();
       }
 
       private void Button_ParallelRight(object sender, RoutedEventArgs e)
       {
+         _rover?.TurnServos180();
          _rover?.ParallelRight();
       }
 
@@ -90,11 +94,13 @@ namespace SimpleRoverController
 
       private void ButtonRotateCounter(object sender, RoutedEventArgs e)
       {
+         _rover?.TurnCrossLegs();
          _rover?.RotateCounterClockwise();
       }
 
       private void ButtonRotateClockwise(object sender, RoutedEventArgs e)
       {
+         _rover?.TurnCrossLegs();
          _rover?.RotateClockwise();
       }
    }

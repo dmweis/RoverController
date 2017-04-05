@@ -7,7 +7,7 @@ const int dir_b = 7;
 
 const uint8_t LEFT_FRONT_MOTOR = 0;
 const uint8_t RIGHT_FRONT_MOTOR = 3;
-const uint8_t LEFT_REAR_MOTOR = 42;
+const uint8_t LEFT_REAR_MOTOR = 17;
 const uint8_t RIGHT_REAR_MOTOR = 4;
 
 const uint8_t LEFT_FRONT_SERVO = 1;
@@ -27,6 +27,7 @@ void setup()
     while (!Serial)
         ;
     Serial.println("Starting rover");
+    Serial.println("VER 1.1");
     // init outputs
     pinMode(pwm_a, OUTPUT);
     pinMode(pwm_b, OUTPUT);
@@ -38,6 +39,10 @@ void setup()
     // begin i2c driver
     pwm.begin();
     pwm.setPWMFreq(60);
+    pwm.setPWM(LEFT_FRONT_MOTOR, 0, 345);
+    pwm.setPWM(RIGHT_FRONT_MOTOR, 0, 330);
+    pwm.setPWM(LEFT_REAR_MOTOR, 0, 375);
+    pwm.setPWM(RIGHT_REAR_MOTOR, 0, 360);
     Serial.println("Rover ready");
 }
 
@@ -45,7 +50,8 @@ void loop()
 {
     if (Serial.available() > 1)
     {
-        if (Serial.read() == START)
+        int start = Serial.read();
+        if (start == START)
         {
             int command = Serial.parseInt();
             switch (command)
@@ -63,7 +69,8 @@ void loop()
         }
         else
         {
-            Serial.println("Exited because incorrect START");
+            Serial.print("START wrong: ");
+            Serial.println(start);
         }
     }
 }
@@ -77,7 +84,8 @@ void SetAllMotors()
     char end = Serial.read();
     if (end != END)
     {
-        Serial.println("Exited because incorrect END");
+        Serial.print("END wrong: ");
+        Serial.println(end);
         return;
     }
     pwm.setPWM(LEFT_FRONT_MOTOR, 0, left_front_pulse);
@@ -95,7 +103,8 @@ void SetAllServos()
     char end = Serial.read();
     if (end != END)
     {
-        Serial.println("Exited because incorrect END");
+        Serial.print("END wrong: ");
+        Serial.println(end);
         return;
     }
     pwm.setPWM(LEFT_FRONT_SERVO, 0, left_front_pulse);
@@ -108,20 +117,15 @@ void SetMotor()
 {
     uint8_t index = (uint8_t)Serial.parseInt();
     uint16_t pulse = (uint16_t)Serial.parseInt();
-    Serial.print("index: ");
-    Serial.print(index);
-    Serial.print(" pulse: ");
-    Serial.println(pulse);
     char end = Serial.read();
     if (end != END)
     {
-        Serial.println("Exited because incorrect END");
+        Serial.print("END wrong: ");
+        Serial.println(end);
         return;
     }
     if (index == 17)
     {
-        Serial.print("motor A ");
-
         return;
     }
     pwm.setPWM(index, 0, pulse);
@@ -132,16 +136,12 @@ void setMotorA(int pulse)
     if (pulse >= 375)
     {
         int motorPwm = constrain(map(pulse, 375, 600, 0, 255), 0, 255);
-        Serial.print("set HIGH: ");
-        Serial.println(motorPwm);
         digitalWrite(dir_a, HIGH);
         analogWrite(pwm_a, motorPwm);
     }
     else
     {
         int motorPwm = constrain(map(pulse, 375, 150, 0, 255), 0, 255);
-        Serial.print("set LOW: ");
-        Serial.println(motorPwm);
         digitalWrite(dir_a, LOW);
         analogWrite(pwm_a, motorPwm);
     }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/buttonForward"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:text="Forward" />
+    <Button
+        android:id="@+id/buttonSteerLeft"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/buttonForward"
+        android:text="Steer Right" />
+    <Button
+        android:id="@+id/buttonSteerRight"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/buttonForward"
+        android:text="Steer Right" />
+    <Button
+        android:id="@+id/buttonStop"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/buttonForward"
+        android:text="STOP" />
+    <Button
+        android:id="@+id/buttonStrafeLeft"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_toLeftOf="@id/buttonStop"
+        android:layout_alignTop="@id/buttonStop"
+        android:text="Strafe left" />
+    <Button
+        android:id="@+id/buttonStrafeRight"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_toRightOf="@id/buttonStop"
+        android:layout_alignTop="@id/buttonStop"
+        android:text="Strafe right" />
+    <Button
+        android:id="@+id/buttonBackwards"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/buttonStop"
+        android:text="backwards" />
+    <Button
+        android:id="@+id/buttonRotAnti"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_toLeftOf="@id/buttonBackwards"
+        android:layout_alignTop="@id/buttonBackwards"
+        android:text="Rotate anti" />
+    <Button
+        android:id="@+id/buttonRotateClock"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_toRightOf="@id/buttonBackwards"
+        android:layout_alignTop="@id/buttonBackwards"
+        android:text="Clockwise" />
+    <TextView
+        android:id="@+id/textBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonBackwards"
+        android:maxLines="10"
+        android:gravity="bottom"
+        android:scrollbars="vertical" />
+</RelativeLayout>
