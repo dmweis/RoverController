@@ -68,7 +68,7 @@ namespace dweis.Rover.Connector
 
       public void TurnServos180()
       {
-         _port?.Write($"{{2 480 280 250 480}}");
+         _port?.Write($"{{2 480 280 280 480}}");
       }
 
       public void TurnSlightlyLeft()

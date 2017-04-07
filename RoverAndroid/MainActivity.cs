@@ -136,14 +136,14 @@ namespace RoverAndroid
 
       public void StrafeLeft()
       {
-         _messageBuffer.Add($"{{2 480 280 250 480}}");
+         _messageBuffer.Add($"{{2 480 280 280 480}}");
          _messageBuffer.Add($"{{1 600 600 150 150}}");
 
       }
 
       public void StrafeRight()
       {
-         _messageBuffer.Add($"{{2 480 280 250 480}}");
+         _messageBuffer.Add($"{{2 480 280 280 480}}");
          _messageBuffer.Add($"{{1 150 150 600 600}}");
 
       }
