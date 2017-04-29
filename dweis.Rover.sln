@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dweis.Rover", "dweis.Rover\dweis.Rover.csproj", "{47EC384E-2140-40E9-A357-6070F5A60438}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServonController", "ServonController\ServonController.csproj", "{F3CB727A-37B2-48FE-8679-EE2D0FAF5B9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dweis.Rover.Connector", "dweis.Rover.Connector\dweis.Rover.Connector.csproj", "{C2E6DA1A-498A-4FA8-BFCB-4F61DC7C1BF5}"
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47EC384E-2140-40E9-A357-6070F5A60438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47EC384E-2140-40E9-A357-6070F5A60438}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47EC384E-2140-40E9-A357-6070F5A60438}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47EC384E-2140-40E9-A357-6070F5A60438}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3CB727A-37B2-48FE-8679-EE2D0FAF5B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3CB727A-37B2-48FE-8679-EE2D0FAF5B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3CB727A-37B2-48FE-8679-EE2D0FAF5B9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
