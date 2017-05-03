@@ -3,7 +3,7 @@
 uint8_t LEFT_FRONT_MOTOR  = 4;
 uint8_t RIGHT_FRONT_MOTOR = 5;
 uint8_t LEFT_REAR_MOTOR   = 6;
-uint8_t RIGHT_REAR_MOTOR  = 7
+uint8_t RIGHT_REAR_MOTOR  = 7;
 
 uint8_t LEFT_FRONT_SERVO  = 0;
 uint8_t RIGHT_FRONT_SERVO = 1;
@@ -61,6 +61,10 @@ void loop()
             case 3:
                 SetMotorIndexes();
                 Ack(3);
+                break;
+            case 4:
+                SendMotorIndexes();
+                Ack(4);
                 break;
             }
         }
@@ -161,3 +165,17 @@ void SetMotorIndexes(){
     uint8_t RIGHT_REAR_SERVO  = RIGHT_REAR_SERVO_TMP;
 }
 
+// command 4
+void SendMotorIndexes(){
+    char end = Serial.read();
+    if (end != END)
+    {
+        Serial.print("END wrong: ");
+        Serial.println(end);
+        return;
+    }
+    String text = String( '{'
+    + LEFT_FRONT_MOTOR + ' ' + RIGHT_FRONT_MOTOR + ' ' + LEFT_REAR_MOTOR + ' ' + RIGHT_REAR_MOTOR + ' '
+    + LEFT_FRONT_SERVO + ' '+ RIGHT_FRONT_SERVO + ' '+ LEFT_REAR_SERVO + ' '+ RIGHT_REAR_SERVO + '}');
+    Serial.println(text);
+}
