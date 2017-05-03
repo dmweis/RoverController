@@ -83,37 +83,37 @@ namespace dweis.Rover.Connector
 
       public void FullForward()
       {
-         _port?.Write($"{{1 150 600 150 600}}");
+         _port?.Write($"{{1 200 550 200 550}}");
       }
 
       public void FullBackwards()
       {
-         _port?.Write($"{{1 600 150 600 150}}");
+         _port?.Write($"{{1 550 200 550 200}}");
       }
 
       public void StopMotors()
       {
-         _port?.Write($"{{1 345 330 375 360}}");
+         _port?.Write($"{{1 345 365 345 360}}");
       }
 
       public void ParallelLeft()
       {
-         _port?.Write($"{{1 600 600 150 150}}");
+         _port?.Write($"{{1 550 550 200 200}}");
       }
 
       public void ParallelRight()
       {
-         _port?.Write($"{{1 150 150 600 600}}");
+         _port?.Write($"{{1 200 200 550 550}}");
       }
 
       public void RotateClockwise()
       {
-         _port?.Write($"{{1 150 150 150 150}}");
+         _port?.Write($"{{1 200 200 200 200}}");
       }
 
       public void RotateCounterClockwise()
       {
-         _port?.Write($"{{1 600 600 600 600}}");
+         _port?.Write($"{{1 550 550 550 550}}");
       }
    }
 }

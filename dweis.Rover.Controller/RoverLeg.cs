@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace dweis.Rover.Controller
 {
@@ -8,6 +9,8 @@ namespace dweis.Rover.Controller
    {
       public RoverServo Servo { get; }
       public RoverMotor Motor { get; }
+      [JsonIgnore]
+      public bool Reversed { get; set; }
 
       private bool _inverse = false;
 
@@ -21,16 +24,6 @@ namespace dweis.Rover.Controller
       {
          Servo = new RoverServo();
          Motor = new RoverMotor();
-      }
-
-      public int CalculateAngle(int angle)
-      {
-         return Servo.CalculateAngle(angle, out _inverse);
-      }
-
-      public int CalculateSpeed(int speed)
-      {
-         return Motor.CalculateSpeed(speed, _inverse);
       }
    }
 }

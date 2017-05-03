@@ -40,23 +40,19 @@ namespace dweis.Rover.Controller
 
       public void SetLegs(int angle)
       {
-         if (angle < -180 || angle > 180)
-         {
-            throw new ArgumentOutOfRangeException(nameof(angle));
-         }
-         int frontLeftPulse  = FrontLeft.CalculateAngle(-angle);
-         int frontRightPulse = FrontRight.CalculateAngle(angle);
-         int rearLeftPulse   = RearLeft.CalculateAngle(angle);
-         int rearRightPulse  = RearRight.CalculateAngle(angle);
+         int frontLeftPulse;
+         int frontRightPulse;
+         int rearLeftPulse;
+         int rearRightPulse;
          NewMessage?.Invoke(this, $"{{2 {frontLeftPulse} {frontRightPulse} {rearLeftPulse} {rearRightPulse}}}");
       }
 
       public void SetSpeed(int speed)
       {
-         int frontLeftPulse  = FrontLeft.CalculateSpeed(speed);
-         int frontRightPulse = FrontRight.CalculateSpeed(speed);
-         int rearLeftPulse   = RearLeft.CalculateSpeed(speed);
-         int rearRightPulse  = RearRight.CalculateSpeed(speed);
+         int frontLeftPulse;
+         int frontRightPulse;
+         int rearLeftPulse;
+         int rearRightPulse;
          NewMessage?.Invoke(this, $"{{1 {frontLeftPulse} {frontRightPulse} {rearLeftPulse} {rearRightPulse}}}");
       }
 
@@ -72,6 +68,16 @@ namespace dweis.Rover.Controller
       {
          string data = "{4}";
          NewMessage?.Invoke(this, data);
+      }
+
+      private static float MapFloat(float value, float inMin, float inMax, float outMin, float outMax)
+      {
+         return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+      }
+
+      private static int Mod(int a, int b)
+      {
+         return ((a % b) + b) % b;
       }
    }
 }
