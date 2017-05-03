@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace dweis.Rover.Controller
 {
-   public class Rover : IRover
+   public class Rover
    {
       public event EventHandler<string> NewMessage;
 
