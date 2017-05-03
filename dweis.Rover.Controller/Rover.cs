@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace dweis.Rover.Controller
@@ -39,7 +40,7 @@ namespace dweis.Rover.Controller
       }
 
       public void SetLegs(int leftFront, int rightFront, int leftRear, int rightRear)
-      {         
+      {
          int frontLeftPulse = MapAngle(leftFront, FrontLeft.Servo.Angle1, FrontLeft.Servo.Angle2, FrontLeft.Servo.Pwm1, FrontLeft.Servo.Pwm2);
          int frontRightPulse = MapAngle(rightFront, FrontRight.Servo.Angle1, FrontRight.Servo.Angle2, FrontRight.Servo.Pwm1, FrontRight.Servo.Pwm2);
          int rearLeftPulse = MapAngle(leftRear, RearLeft.Servo.Angle1, RearLeft.Servo.Angle2, RearLeft.Servo.Pwm1, RearLeft.Servo.Pwm2);
@@ -49,7 +50,25 @@ namespace dweis.Rover.Controller
 
       public void SetSpeed(int leftFront, int rightFront, int leftRear, int rightRear)
       {
-         int frontLeftPulse = leftFront > 0 ? MapAngle(leftFront, 0, 100, FrontLeft.Motor.StationaryValue, FrontLeft.Motor.MaxForward) 
+         const int max = -100;
+         const int min = -max;
+         if (leftFront < min || leftFront > max)
+         {
+            throw new ArgumentOutOfRangeException(nameof(leftFront));
+         }
+         if (rightFront < min || rightFront > max)
+         {
+            throw new ArgumentOutOfRangeException(nameof(rightFront));
+         }
+         if (leftRear < min || leftRear > max)
+         {
+            throw new ArgumentOutOfRangeException(nameof(leftRear));
+         }
+         if (rightRear < min || rightRear > max)
+         {
+            throw new ArgumentOutOfRangeException(nameof(rightRear));
+         }
+         int frontLeftPulse = leftFront > 0 ? MapAngle(leftFront, 0, 100, FrontLeft.Motor.StationaryValue, FrontLeft.Motor.MaxForward)
             : MapAngle(leftFront, 0, -100, FrontLeft.Motor.StationaryValue, FrontLeft.Motor.MaxBackwards);
          int frontRightPulse = rightFront > 0 ? MapAngle(rightFront, 0, 100, FrontRight.Motor.StationaryValue, FrontRight.Motor.MaxForward)
             : MapAngle(rightFront, 0, -100, FrontRight.Motor.StationaryValue, FrontRight.Motor.MaxBackwards);
@@ -76,12 +95,83 @@ namespace dweis.Rover.Controller
 
       private static int MapAngle(float value, float inMin, float inMax, float outMin, float outMax)
       {
-         return (int) Math.Round((value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin);
+         return (int)Math.Round((value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin);
       }
 
       //private static int Mod(int a, int b)
       //{
       //   return ((a % b) + b) % b;
       //}
+
+      #region simple commands
+      public void TurnCrossLegs(int angle = 50)
+      {
+         SetLegs(angle, angle, angle, angle);
+      }
+
+      public void TurnServosStraight()
+      {
+         const int value = 0;
+         SetLegs(value, value, value, value);
+      }
+
+      public void TurnServosParallel()
+      {
+         const int value = 90;
+         SetLegs(value, value, value, value);
+      }
+
+      public void TurnSlightlyLeft(int angle = 20)
+      {
+         SetLegs(-angle, angle, -angle, angle);
+      }
+
+      public void TurnSlightlyRight(int angle = 20)
+      {
+         SetLegs(-angle, angle, -angle, angle);
+      }
+
+      public void FullForward(int speed = 100)
+      {
+         TurnServosStraight();
+         SetSpeed(speed, speed, speed, speed);
+      }
+
+      public void FullBackwards(int speed = 100)
+      {
+         TurnServosStraight();
+         SetSpeed(-speed, -speed, -speed, -speed);
+      }
+
+      public void StopMotors()
+      {
+         const int value = 0;
+         SetSpeed(value, value, value, value);
+      }
+
+      public void ParallelLeft(int speed = 100)
+      {
+         TurnServosParallel();
+         SetSpeed(-speed, speed, speed, -speed);
+      }
+
+      public void ParallelRight(int speed = 100)
+      {
+         TurnServosParallel();
+         SetSpeed(speed, -speed, -speed, speed);
+      }
+
+      public void RotateClockwise(int speed = 100)
+      {
+         TurnCrossLegs();
+         SetSpeed(speed, -speed, speed, -speed);
+      }
+
+      public void RotateCounterClockwise(int speed = 100)
+      {
+         TurnCrossLegs();
+         SetSpeed(-speed, speed, -speed, speed);
+      }
+      #endregion
    }
 }
