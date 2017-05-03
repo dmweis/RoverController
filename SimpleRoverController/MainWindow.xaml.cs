@@ -22,7 +22,7 @@ namespace SimpleRoverController
    /// </summary>
    public partial class MainWindow : Window
    {
-      private Rover _rover;
+      private RoverConnector _roverConnector;
 
       public MainWindow()
       {
@@ -35,73 +35,73 @@ namespace SimpleRoverController
 
       private void Button_Turn90(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnServos90();
+         _roverConnector?.TurnServos90();
       }
 
       private void Button_Turn180(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnServos180();
+         _roverConnector?.TurnServos180();
       }
 
       private void Button_Forward(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnServos90();
-         _rover?.FullForward();
+         _roverConnector?.TurnServos90();
+         _roverConnector?.FullForward();
       }
 
       private void Button_STOP(object sender, RoutedEventArgs e)
       {
-         _rover?.StopMotors();
+         _roverConnector?.StopMotors();
       }
 
       private void Button_Backwards(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnServos90();
-         _rover?.FullBackwards();
+         _roverConnector?.TurnServos90();
+         _roverConnector?.FullBackwards();
       }
 
       private void Button_ParallelLeft(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnServos180();
-         _rover?.ParallelLeft();
+         _roverConnector?.TurnServos180();
+         _roverConnector?.ParallelLeft();
       }
 
       private void Button_ParallelRight(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnServos180();
-         _rover?.ParallelRight();
+         _roverConnector?.TurnServos180();
+         _roverConnector?.ParallelRight();
       }
 
       private async void SelectorBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
       {
          SerialPortAddress address = e.AddedItems[0] as SerialPortAddress;
-         _rover?.Close();
-         _rover = await Task.Run(() => new Rover(address));
+         _roverConnector?.Close();
+         _roverConnector = await Task.Run(() => new RoverConnector(address));
       }
 
       private void ButtonSetServos(object sender, RoutedEventArgs e)
       {
-         _rover?.SetServo(Motors.LEFT_FRONT_SERVO, (float)LFSlider.Value);
-         _rover?.SetServo(Motors.RIGHT_FRONT_SERVO, (float)RFSlider.Value);
-         _rover?.SetServo(Motors.LEFT_REAR_SERVO, (float)LRSlider.Value);
-         _rover?.SetServo(Motors.RIGHT_REAR_SERVO, (float)RRSlider.Value);
+         _roverConnector?.SetServo(Motors.LEFT_FRONT_SERVO, (float)LFSlider.Value);
+         _roverConnector?.SetServo(Motors.RIGHT_FRONT_SERVO, (float)RFSlider.Value);
+         _roverConnector?.SetServo(Motors.LEFT_REAR_SERVO, (float)LRSlider.Value);
+         _roverConnector?.SetServo(Motors.RIGHT_REAR_SERVO, (float)RRSlider.Value);
       }
 
       private void ButtonCrossLegged(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnCrossLegs();
+         _roverConnector?.TurnCrossLegs();
       }
 
       private void ButtonRotateCounter(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnCrossLegs();
-         _rover?.RotateCounterClockwise();
+         _roverConnector?.TurnCrossLegs();
+         _roverConnector?.RotateCounterClockwise();
       }
 
       private void ButtonRotateClockwise(object sender, RoutedEventArgs e)
       {
-         _rover?.TurnCrossLegs();
-         _rover?.RotateClockwise();
+         _roverConnector?.TurnCrossLegs();
+         _roverConnector?.RotateClockwise();
       }
    }
 }

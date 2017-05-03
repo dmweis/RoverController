@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace dweis.Rover.Connector
 {
-   public class Rover
+   public class RoverConnector
    {
       private SerialPort _port;
       private Thread readerThread;
       private bool _keepreading = true;
 
-      public Rover(SerialPortAddress address)
+      public RoverConnector(SerialPortAddress address)
       {
          _port = new SerialPort(address.Name);
          _port.Encoding = Encoding.ASCII;

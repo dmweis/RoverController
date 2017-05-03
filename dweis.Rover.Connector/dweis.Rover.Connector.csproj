@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Rover.cs" />
+    <Compile Include="RoverConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialPortAddress.cs" />
     <Compile Include="SerialPortService.cs" />
