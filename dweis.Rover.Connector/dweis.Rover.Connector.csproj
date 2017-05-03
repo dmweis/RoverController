@@ -41,11 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRoverConnector.cs" />
+    <Compile Include="NewRoverConnector.cs" />
     <Compile Include="RoverConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialPortAddress.cs" />
     <Compile Include="SerialPortService.cs" />
     <Compile Include="Motors.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dweis.Rover.Controller\dweis.Rover.Controller.csproj">
+      <Project>{203ce290-b538-4f48-a286-08dbd70edddc}</Project>
+      <Name>dweis.Rover.Controller</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
