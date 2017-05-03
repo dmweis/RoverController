@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +23,13 @@ namespace SimpleRoverController
    /// </summary>
    public partial class MainWindow : Window
    {
-      private RoverConnector _roverConnector;
+      private IRoverConnector _roverConnector;
+      private string _configJson;
 
       public MainWindow()
       {
          InitializeComponent();
+         _configJson = File.ReadAllText("config.json");
          foreach (var port in SerialPortService.GetSerialPorts())
          {
             SelectorBox.Items.Add(port);
@@ -76,15 +79,16 @@ namespace SimpleRoverController
       {
          SerialPortAddress address = e.AddedItems[0] as SerialPortAddress;
          _roverConnector?.Close();
-         _roverConnector = await Task.Run(() => new RoverConnector(address));
+         //_roverConnector = await Task.Run(() => new RoverConnector(address));
+         _roverConnector = await Task.Run(() => new NewRoverConnector(address, _configJson));
       }
 
       private void ButtonSetServos(object sender, RoutedEventArgs e)
       {
-         _roverConnector?.SetServo(Motors.LEFT_FRONT_SERVO, (float)LFSlider.Value);
-         _roverConnector?.SetServo(Motors.RIGHT_FRONT_SERVO, (float)RFSlider.Value);
-         _roverConnector?.SetServo(Motors.LEFT_REAR_SERVO, (float)LRSlider.Value);
-         _roverConnector?.SetServo(Motors.RIGHT_REAR_SERVO, (float)RRSlider.Value);
+         //_roverConnector?.SetServo(Motors.LEFT_FRONT_SERVO, (float)LFSlider.Value);
+         //_roverConnector?.SetServo(Motors.RIGHT_FRONT_SERVO, (float)RFSlider.Value);
+         //_roverConnector?.SetServo(Motors.LEFT_REAR_SERVO, (float)LRSlider.Value);
+         //_roverConnector?.SetServo(Motors.RIGHT_REAR_SERVO, (float)RRSlider.Value);
       }
 
       private void ButtonCrossLegged(object sender, RoutedEventArgs e)

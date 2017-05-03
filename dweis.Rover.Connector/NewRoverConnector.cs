@@ -8,14 +8,17 @@ using System.Threading.Tasks;
 
 namespace dweis.Rover.Connector
 {
-   public class RoverConnector : IRoverConnector
+   public class NewRoverConnector : IRoverConnector
    {
       private SerialPort _port;
       private Thread readerThread;
       private bool _keepreading = true;
+      private Controller.Rover _rover;
 
-      public RoverConnector(SerialPortAddress address)
+      public NewRoverConnector(SerialPortAddress address, string json)
       {
+         _rover = Controller.Rover.FromJson(json);
+         _rover.NewMessage += _rover_NewMessage;
          _port = new SerialPort(address.Name);
          _port.Encoding = Encoding.ASCII;
          _port.Open();
@@ -35,6 +38,11 @@ namespace dweis.Rover.Connector
          readerThread.Start();
       }
 
+      private void _rover_NewMessage(object sender, string e)
+      {
+         _port?.Write(e);
+      }
+
       public void Close()
       {
          try
@@ -47,73 +55,81 @@ namespace dweis.Rover.Connector
          }
          catch
          {
-            
-         }
-      }
 
-      public void SetServo(Motors wheel, float pulse)
-      {
-         _port?.Write($"{{0 {(int)wheel} {(int)pulse}}}");
+         }
       }
 
       public void TurnCrossLegs()
       {
-         _port?.Write($"{{2 390 390 390 390}}");
+         int angle = 50;
+         _rover.SetLegs(angle, angle, angle, angle);
       }
 
       public void TurnServos90()
       {
-         _port?.Write($"{{2 250 490 480 250}}");
+         _rover.SetLegs(0, 0, 0, 0);
       }
 
       public void TurnServos180()
       {
-         _port?.Write($"{{2 480 280 280 480}}");
+         _rover.SetLegs(90, 90, 90, 90);
       }
 
       public void TurnSlightlyLeft()
       {
-         _port?.Write($"{{2 165 424 550 320}}");
+         int angle = 20;
+         _rover.SetLegs(-angle, angle, -angle, angle);
       }
 
       public void TurnSlightlyRight()
       {
-         _port?.Write($"{{2 310 555 420 200}}");
+         int angle = 20;
+         _rover.SetLegs(-angle, angle, -angle, angle);
       }
 
       public void FullForward()
       {
-         _port?.Write($"{{1 200 550 200 550}}");
+         int speed = 100;
+         _rover.SetSpeed(speed, speed, speed, speed);
       }
 
       public void FullBackwards()
       {
-         _port?.Write($"{{1 550 200 550 200}}");
+         int speed = 100;
+         _rover.SetSpeed(-speed, -speed, -speed, -speed);
       }
 
       public void StopMotors()
       {
-         _port?.Write($"{{1 345 365 345 360}}");
+         _rover.SetSpeed(0, 0, 0, 0);
       }
 
       public void ParallelLeft()
       {
-         _port?.Write($"{{1 550 550 200 200}}");
+         TurnServos180();
+         int speed = 100;
+         _rover.SetSpeed(-speed, speed, speed, -speed);
       }
 
       public void ParallelRight()
       {
-         _port?.Write($"{{1 200 200 550 550}}");
+         TurnServos180();
+         int speed = 100;
+         _rover.SetSpeed(speed, -speed, -speed, speed);
       }
 
       public void RotateClockwise()
       {
-         _port?.Write($"{{1 200 200 200 200}}");
+         TurnCrossLegs();
+         int speed = 100;
+         _rover.SetSpeed(speed, -speed, speed, -speed);
       }
 
       public void RotateCounterClockwise()
       {
-         _port?.Write($"{{1 550 550 550 550}}");
+         TurnCrossLegs();
+         int speed = 100;
+         _rover.SetSpeed(-speed, speed, -speed, speed);
       }
    }
 }
