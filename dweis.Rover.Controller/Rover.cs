@@ -50,7 +50,7 @@ namespace dweis.Rover.Controller
 
       public void SetSpeed(int leftFront, int rightFront, int leftRear, int rightRear)
       {
-         const int max = -100;
+         const int max = 100;
          const int min = -max;
          if (leftFront < min || leftFront > max)
          {
@@ -128,18 +128,16 @@ namespace dweis.Rover.Controller
 
       public void TurnSlightlyRight(int angle = 20)
       {
-         SetLegs(-angle, angle, -angle, angle);
+         SetLegs(angle, -angle, angle, -angle);
       }
 
       public void FullForward(int speed = 100)
       {
-         TurnServosStraight();
          SetSpeed(speed, speed, speed, speed);
       }
 
       public void FullBackwards(int speed = 100)
       {
-         TurnServosStraight();
          SetSpeed(-speed, -speed, -speed, -speed);
       }
 
