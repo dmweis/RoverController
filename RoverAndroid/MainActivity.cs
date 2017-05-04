@@ -10,6 +10,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Text.Method;
 using Android.Util;
+using dweis.Rover.Controller;
 using Java.IO;
 using Java.Util;
 using Console = System.Console;
@@ -33,13 +34,21 @@ namespace RoverAndroid
 
       private TextView _textView;
 
-      private RoverConnector _rover;
+      private RoverConnector _roverConnector;
+      private Rover _rover;
 
       protected override void OnCreate(Bundle bundle)
       {
          base.OnCreate(bundle);
          // Set our view from the "main" layout resource
          SetContentView (Resource.Layout.Main);
+         using (var stream = Assets.Open("config.json"))
+         {
+            using (var reader = new StreamReader(stream))
+            {
+               _rover = Rover.FromJson(reader.ReadToEnd());
+            }
+         }
          _buttonRotateAnti = FindViewById<Button>(Resource.Id.buttonRotAnti);
          _buttonForward = FindViewById<Button>(Resource.Id.buttonForward);
          _buttonSteerLeft = FindViewById<Button>(Resource.Id.buttonSteerLeft);
@@ -56,19 +65,45 @@ namespace RoverAndroid
 
          _textView.Text = "Incoming:\n";
 
-         _rover = new RoverConnector();
-         _rover.NewMessage += (sender, message) => RunOnUiThread( () => _textView.Text += message);
-         _buttonRotateAnti.Click += (sender, args) => _rover.RotateAnti();
-         _buttonForward.Click += (sender, args) => _rover.Forward();
-         _buttonSteerLeft.Click += (sender, args) => _rover.SteerLeft();
-         _buttonSteerRight.Click += (sender, args) => _rover.SteerRight();
+         _roverConnector = new RoverConnector();
+         _rover.NewMessage += (sender, message) => _roverConnector.Enqueue(message);
+
+         _roverConnector.NewMessage += (sender, message) => RunOnUiThread( () => _textView.Text += message);
+         _buttonRotateAnti.Click += (sender, args) => _rover.RotateCounterClockwise();
+         _buttonForward.Click += (sender, args) =>
+         {
+            _rover.TurnServosStraight();
+            _rover.FullForward();
+         };
+         _buttonSteerLeft.Click += (sender, args) =>
+         {
+            _rover.TurnSlightlyLeft();
+            _rover.FullForward();
+         };
+         _buttonSteerRight.Click += (sender, args) =>
+         {
+            _rover.TurnSlightlyRight();
+            _rover.FullForward();
+         };
          _buttonRotateClockwise.Click += (sender, args) => _rover.RotateClockwise();
-         _buttonStrafeLeft.Click += (sender, args) => _rover.StrafeLeft();
-         _buttonStop.Click += (sender, args) => _rover.Stop();
-         _buttonStrafeRight.Click += (sender, args) => _rover.StrafeRight();
-         _buttonBackwards.Click += (sender, args) => _rover.Backwards();
-         _buttonSteerLeftBack.Click += (sender, args) => _rover.SteerLeftBack();
-         _buttonSteerRightBack.Click += (sender, args) => _rover.SteerRightBack();
+         _buttonStrafeLeft.Click += (sender, args) => _rover.ParallelLeft();
+         _buttonStop.Click += (sender, args) => _rover.StopMotors();
+         _buttonStrafeRight.Click += (sender, args) => _rover.ParallelRight();
+         _buttonBackwards.Click += (sender, args) =>
+         {
+            _rover.TurnServosStraight();
+            _rover.FullBackwards();
+         };
+         _buttonSteerLeftBack.Click += (sender, args) =>
+         {
+            _rover.TurnSlightlyLeft();
+            _rover.FullBackwards();
+         };
+         _buttonSteerRightBack.Click += (sender, args) =>
+         {
+            _rover.TurnSlightlyRight();
+            _rover.FullBackwards();
+         };
       }
 
    }
@@ -91,75 +126,6 @@ namespace RoverAndroid
       public void Enqueue(string message)
       {
          _messageBuffer.Add(message);
-      }
-
-      public void Forward()
-      {
-         _messageBuffer.Add($"{{2 250 490 480 250}}");
-         _messageBuffer.Add($"{{1 150 600 150 600}}");
-      }
-
-      public void Backwards()
-      {
-         _messageBuffer.Add($"{{2 250 490 480 250}}");
-         _messageBuffer.Add($"{{1 600 150 600 150}}");
-      }
-
-      public void SteerLeft()
-      {
-         _messageBuffer.Add($"{{2 165 424 550 320}}");
-         _messageBuffer.Add($"{{1 150 600 150 600}}");
-      }
-
-      public void SteerRight()
-      {
-         _messageBuffer.Add($"{{2 310 555 420 200}}");
-         _messageBuffer.Add($"{{1 150 600 150 600}}");
-      }
-
-      public void SteerLeftBack()
-      {
-         _messageBuffer.Add($"{{2 165 424 550 320}}");
-         _messageBuffer.Add($"{{1 600 150 600 150}}");
-      }
-
-      public void SteerRightBack()
-      {
-         _messageBuffer.Add($"{{2 310 555 420 200}}");
-         _messageBuffer.Add($"{{1 600 150 600 150}}");
-      }
-
-      public void Stop()
-      {
-         _messageBuffer.Add($"{{1 345 330 375 360}}");
-      }
-
-      public void StrafeLeft()
-      {
-         _messageBuffer.Add($"{{2 480 280 280 480}}");
-         _messageBuffer.Add($"{{1 600 600 150 150}}");
-
-      }
-
-      public void StrafeRight()
-      {
-         _messageBuffer.Add($"{{2 480 280 280 480}}");
-         _messageBuffer.Add($"{{1 150 150 600 600}}");
-
-      }
-
-      public void RotateAnti()
-      {
-         _messageBuffer.Add($"{{2 390 390 390 390}}");
-         _messageBuffer.Add($"{{1 600 600 600 600}}");
-
-      }
-
-      public void RotateClockwise()
-      {
-         _messageBuffer.Add($"{{2 390 390 390 390}}");
-         _messageBuffer.Add($"{{1 150 150 150 150}}");
-
       }
 
       private void BtComm()
