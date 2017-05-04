@@ -1,0 +1,62 @@
+{
+    "FrontLeft": {
+        "Servo": {
+            "Index": 0,
+            "Angle1": 0,
+            "Pwm1": 260,
+            "Angle2": 90,
+            "Pwm2": 490
+        },
+        "Motor": {
+            "Index": 4,
+            "StationaryValue": 350,
+            "MaxForward": 200,
+            "MaxBackwards": 550
+        }
+    },
+    "FrontRight": {
+        "Servo": {
+            "Index": 1,
+            "Angle1": 90,
+            "Pwm1": 280,
+            "Angle2": 0,
+            "Pwm2": 485
+        },
+        "Motor": {
+            "Index": 5,
+            "StationaryValue": 365,
+            "MaxForward": 550,
+            "MaxBackwards": 200
+        }
+    },
+    "RearLeft": {
+        "Servo": {
+            "Index": 2,
+            "Angle1": 90,
+            "Pwm1": 290,
+            "Angle2": 0,
+            "Pwm2": 500
+        },
+        "Motor": {
+            "Index": 6,
+            "StationaryValue": 345,
+            "MaxForward": 200,
+            "MaxBackwards": 550
+        }
+    },
+    "RearRight": {
+        "Servo": {
+            "Index": 3,
+            "Angle1": 0,
+            "Pwm1": 240,
+            "Angle2": 90,
+            "Pwm2": 460
+        },
+        "Motor": {
+            "Index": 7,
+            "StationaryValue": 360,
+            "MaxForward": 550,
+            "MaxBackwards": 200
+        }
+    }
+}
