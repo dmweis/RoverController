@@ -1,1 +1,2 @@
 nohup mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so -rot 180 -fps 15" &
+mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so -fps 5 -vf -hf -x 160 -y 120"
